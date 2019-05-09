@@ -17,7 +17,7 @@ declare module 'zent/lib/grid' {
     colSpan?: number
     fixed?: 'left' | 'right' | true
     onCellClick?: (data: any, event: React.MouseEvent<HTMLTableDataCellElement>) => any
-    textAign?: 'left' | 'right' | 'center'
+    textAlign?: 'left' | 'right' | 'center'
     nowrap?: boolean
     defaultText?: React.ReactNode
     children?: Array<IGridColumn>
@@ -44,7 +44,7 @@ declare module 'zent/lib/grid' {
     emptyLabel?: string
     selection?: {
       selectedRowKeys?: Array<string>,
-      onSelect?: (selectedkeys: string, selectedRows: Array<any>, currentRow: number) => any,
+      onSelect?: (selectedKeys: Array<string>, selectedRows: Array<any>, currentRow: number) => any,
       getCheckboxProps?: (data: object) => { disabled?: boolean }
     }
     expandation?: {
