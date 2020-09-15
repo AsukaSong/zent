@@ -6,6 +6,12 @@ export type RangeDate = [SingleDate | null, SingleDate | null];
 export type SingleTime = string;
 export type RangeTime = [string, string];
 
+export type DateValueTypeMap = {
+  'string': string
+  'number': number
+  'date': Date
+}
+
 export type DateTuple = [Date, Date];
 export type DateNullTuple = [Date | null, Date | null];
 export type StringTuple = [string, string];
@@ -26,9 +32,7 @@ export type IDisabledDateFunc = (date: Date) => boolean;
 export type IRangeDisabledDateFunc = (date?: Date, type?: RangeType) => boolean;
 interface ICommonProps<DateValue = SingleDate> {
   value: DateValue;
-  onChange: (date: SingleDate | RangeDate | null) => void;
   defaultDate?: DateValue;
-  valueType?: IValueType;
   format?: string;
   disabled?: boolean;
   canClear?: boolean;
@@ -69,12 +73,14 @@ export type IShowTimeOptionWithDefault = PartialRequired<
 >;
 /* ******************************** SinglePicker ******************************** */
 export type IDisabledDate = IDisabledDateFunc | IDisabledDateSimple;
-export interface ISingleProps extends ICommonProps<SingleDate> {
+export interface ISingleProps<T extends keyof DateValueTypeMap> extends ICommonProps<SingleDate> {
   placeholder?: string;
   disabledDate?: IDisabledDate;
   onOpen?: () => void;
   onClose?: () => void;
   name?: string;
+  valueType?: T
+  onChange: (date: DateValueTypeMap[T] | null) => void
 }
 // 季度、周组件
 export interface ISingleSepcialProps
